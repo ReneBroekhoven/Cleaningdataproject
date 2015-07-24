@@ -1,25 +1,6 @@
----
-title: "Cleaning Data Project"
-author: "Rene Broekhoven"
-date: "Thursday, July 23, 2015"
-output: html_document
----
-
-The datafile for this project can be obtained at : 
-
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-
-This is a ZIP-file which you should unzip with your own tools (Windows or Mac) in a directory of your choosing.
-For example : c:/desktop/project
-After unzipping, you will get a folder "getdata-projectfiles-UCI HAR Dataset".
-In this folder you will find "UCI HAR Dataset" : this directory will be your starting point.
-This script can be executed from the original directory (in this example : c:/desktop/project)
-
-
-```{r}
 
 ## Unzipping the dataset will get you the directory :  getdata-projectfiles-UCI HAR Dataset
-## The starting workingdirectory will be set to the subdirectory herein : "........./"UCI HAR Dataset/"
+## The starting workingdirectory should be set to the subdirectory herein : ".........//"UCI HAR Dataset/"
 
 ## Cleaning everything and setting the working directory ##
 rm(list=ls())
@@ -30,7 +11,7 @@ startwd <- getwd()
 ## After the unzipping, there should be the folder :  "getdata-projectfiles-UCI HAR Dataset"
 ## This example is my own directory I used :
 ##      EXAMPLE : my_unzip_dir <- "c:/users/rene/desktop/cleaningdata/project/"
-my_unzip_dir <- "...."
+my_unzip_dir <- "c:/users/rene/desktop/cleaningdata/project/"
 
 
 # setting the working directory
@@ -113,7 +94,7 @@ my_tb <- tbl_df(my_df)
 
 ## QUESTION 5 ##
 
-# using the summarise_each function from dplyr and using "View" for a seperate window
+# using the summarise_each function and View in seperate window
 my_tidy_data <- my_tb %>% arrange(activity, subject) %>% group_by(activity, subject) %>% summarise_each(funs(mean))
 View(my_tidy_data)
 
@@ -122,8 +103,3 @@ write.table(my_tidy_data, file="my_tidy_data.txt", row.names = FALSE)
 
 # get back to the origional directory from where we started
 setwd(startwd)
-
-
-```
-
-

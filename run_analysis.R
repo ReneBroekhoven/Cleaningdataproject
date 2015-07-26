@@ -1,4 +1,5 @@
 
+
 ## Unzipping the dataset will get you the directory :  getdata-projectfiles-UCI HAR Dataset
 ## The starting workingdirectory should be set to the subdirectory herein : ".........//"UCI HAR Dataset/"
 
@@ -37,6 +38,7 @@ features <- as.character(features[,2])
 colnames(my_df) <- features
 
 # to remove the duplicates (although I could nog find them by hand...)
+# i made sure that no col were deleted with mean and std
 my_df <- my_df[ , !duplicated(colnames(my_df))]
 
 # selecting the right columns with a simle regular expression
@@ -71,21 +73,18 @@ levels(my_df$activity) <- labels
 # Appropriately labels the data set with descriptive variable names from the features.txt 
 # activity and subject already labeled
 # this was a lot of work : I wonder if this was meant in the assignment ?
-# I had little clue as to what teh variables really meant
+# I had little clue as to what the variables really meant
 temp <- names(my_df)
+temp <- tolower(temp)
 temp <- gsub("^t", "time", temp)
 temp <- gsub("^f", "frequency", temp)
-temp <- gsub("Body", "_body", temp)
-temp <- gsub("Gravity", "_gravity", temp)
-temp <- gsub("Acc", "_acceleration", temp)
-temp <- gsub("gravityMean", "gravity_mean", temp)
-temp <- gsub("Gyro", "_gyroscope", temp)
-temp <- gsub("Jerk", "_jerk", temp)
-temp <- gsub("Mag", "_magnitude", temp)
-temp <- gsub("_mean()", "_mean", temp)
-temp <- gsub("-mean()", "_mean", temp)
-temp <- gsub("_std()", "_std", temp)
-temp <- gsub("-std()", "_std", temp)
+temp <- gsub("acc", "acceleration", temp)
+temp <- gsub("gyro", "gyroscope", temp)
+temp <- gsub("mag", "magnitude", temp)
+temp <- gsub("\\(\\)", "", temp)
+temp <- gsub("\\(tbody", "timebody", temp)
+temp <- gsub("\\(", "", temp)
+temp <- gsub("\\(", "", temp)
 names(my_df) <- temp
 
 
